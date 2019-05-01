@@ -14,15 +14,15 @@ int main()
 	int x = 0, y = 0, chest = 0, row, col, MineNum;
 
 
-	cout << "请输入场地行数：";
+	cout << "输入场地行数：";
 
 	cin >> row;
 
-	cout << "请输入场地列数：";
+	cout << "输入场地列数：";
 
 	cin >> col;
 
-	cout << "请输入地雷数：";
+	cout << "输入地雷数：";
 
 	cin >> MineNum;
 
