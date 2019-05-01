@@ -8,11 +8,9 @@ using namespace std;
 
 int main()
 {
-
 	srand((unsigned)time(0));
 
-	int x = 0, y = 0, chest = 0, row, col, MineNum;
-
+	int x = 0, y = 0, chest, row, col, MineNum, again;
 
 	cout << "输入场地行数：";
 
@@ -25,6 +23,10 @@ int main()
 	cout << "输入地雷数：";
 
 	cin >> MineNum;
+begin:
+	cout << "开启作弊？(0/1)：";
+
+	cin >> chest;
 
 	vector<vector<string> >ground(row, vector<string>(col, "■"));
 
@@ -49,19 +51,19 @@ int main()
 
 	}
 
-	for (int i = 0; i <= MineNum; i++) {
-	
+	for (int i = 0; i < MineNum; i++) {
+
 		if (mines[rand() % row][rand() % col]) {
-		
+
 			i--;
-		
+
 		}
 		else {
-		
+
 			mines[rand() % row][rand() % col] = 1;
-		
+
 		}
-	
+
 	}
 
 	//正式流程
@@ -139,15 +141,14 @@ int main()
 		case 13:
 			//翻开
 			if (mines[y][x] && (ground[y][x] == "■")) {
-			
-				goto fail;
-			
-			}
-			else if (ground[y][x] == "■"){
-			
-				ground[y][x] = "?";
 
-			begin :
+				goto fail;
+
+			}
+			else if (ground[y][x] == "■") {
+
+				ground[y][x] = "?";
+			action:
 				for (int m = 0; m < row; m++) {
 
 					for (int n = 0; n < col; n++) {
@@ -158,55 +159,55 @@ int main()
 
 						}
 						else {
-							
+
 							continue;
-							
+
 						}
 
-					part1 : 
+					part1:
 						int mine = 0;
-							
+
 						for (int i = m - 1; i < m + 2; i++) {
-				
+
 							if (i < 0 || i >= row) {
-					
+
 								continue;
-					
+
 							}
 							else {
-					
+
 								for (int j = n - 1; j < n + 2; j++) {
-						
+
 									if (j < 0 || j >= col) {
-							
+
 										continue;
-							
+
 									}
 									else {
-							
+
 										if (mines[i][j]) {
-												
+
 											mine++;
-												
+
 										}
-							
+
 									}
-						
+
 								}
-					
+
 							}
-				
+
 						}
 
 						if (mine) {
-								
+
 							ground[m][n] = '0' + mine;
-								
+
 						}
 						else {
 
 							ground[m][n] = "□";
-								
+
 							for (int i = m - 1; i < m + 2; i++) {
 
 								if (i < 0 || i >= row) {
@@ -225,11 +226,11 @@ int main()
 										}
 										else {
 											if (ground[i][j] == "■") {
-													
+
 												ground[i][j] = '?';
 
 											}
-													
+
 										}
 
 									}
@@ -239,15 +240,15 @@ int main()
 							}
 
 						}
-								
-						goto begin;
-							
+
+						goto action;
+
 					}
 
 				}
 
 			}
-		
+
 			for (int i = 0; i < row; i++) {
 
 				for (int j = 0; j < col; j++) {
@@ -263,11 +264,10 @@ int main()
 			}
 
 			goto win;
-
 		out:
 			break;
 
-		case 32 :
+		case 32:
 			if (ground[y][x] == "■") {
 
 				ground[y][x] = "※";
@@ -282,7 +282,7 @@ int main()
 			else if (ground[y][x] == "※") {
 
 				ground[y][x] = "■";
-	
+
 				if (mines[y][x] == 1) {
 
 					MineNum++;
@@ -307,7 +307,7 @@ win:
 			if (mines[i][j]) {
 
 				cout << "※";
-	
+
 			}
 			else {
 
@@ -322,7 +322,7 @@ win:
 	}
 
 	goto end;
-	
+
 fail:
 	system("cls");
 
@@ -335,7 +335,7 @@ fail:
 			if (mines[i][j]) {
 
 				cout.width(2);
-				cout <<'X';
+				cout << 'X';
 
 			}
 			else {
@@ -353,6 +353,17 @@ fail:
 	goto end;
 
 end:
+	cout << '\n' << "再来一局？(0/1): ";
+
+	cin >> again;
+
+	if (again) {
+
+		system("cls");
+
+		goto begin;
+
+	}
 
 	return 0;
 }
