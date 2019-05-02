@@ -36,7 +36,7 @@ begin:
 
 	for (;;) {
 
-		if (MineNum > row * col * 0.3) {
+		if (MineNum > row * col * 0.5) {
 
 			cout << "地雷数过多，请重新输入" << '\n';
 
@@ -71,9 +71,19 @@ begin:
 
 		system("cls");
 
-		cout << "剩余地雷数：" << MineNum << '\n';
+		cout << "剩余地雷数：" << MineNum << '\n' << '\n';
+
+		for (int i = 0; i < 2 * col + 2; i++) {
+			;
+			cout << '@';
+
+		}
+
+		cout << '\n';
 
 		for (int i = 0; i < row; i++) {
+
+			cout << '@';
 
 			for (int j = 0; j < col; j++) {
 
@@ -90,17 +100,31 @@ begin:
 
 			}
 
+			cout << '@';
+
 			cout << '\n';
 
 		}
+
+		for (int i = 0; i < 2 * col + 2; i++) {
+
+			cout << '@';
+
+		}
+
 		cout << '\n';
 
 		if (chest) {
 
+			cout << '\n';
+
 			for (int i = 0; i < row; i++) {
+
+				cout << '\0';
 
 				for (int j = 0; j < col; j++) {
 
+					cout.width(2);
 					cout << mines[i][j];
 
 				}
@@ -300,7 +324,17 @@ win:
 
 	cout << "CONGRATULATIONS!!!!\n" << endl;
 
+	for (int i = 0; i < 2 * col + 2; i++) {
+		;
+		cout << '@';
+
+	}
+
+	cout << '\n';
+
 	for (int i = 0; i < row; i++) {
+
+		cout << '@';
 
 		for (int j = 0; j < col; j++) {
 
@@ -317,7 +351,15 @@ win:
 
 		}
 
+		cout << '@';
+
 		cout << endl;
+
+	}
+
+	for (int i = 0; i < 2 * col + 2; i++) {
+		;
+		cout << '@';
 
 	}
 
@@ -328,7 +370,17 @@ fail:
 
 	cout << "GAME OVER!!!\n" << endl;
 
+	for (int i = 0; i < 2 * col + 2; i++) {
+		;
+		cout << '@';
+
+	}
+
+	cout << '\n';
+
 	for (int i = 0; i < row; i++) {
+
+		cout << '@';
 
 		for (int j = 0; j < col; j++) {
 
@@ -346,7 +398,15 @@ fail:
 
 		}
 
+		cout << '@';
+
 		cout << endl;
+
+	}
+
+	for (int i = 0; i < 2 * col + 2; i++) {
+		;
+		cout << '@';
 
 	}
 
@@ -360,6 +420,9 @@ end:
 	if (again) {
 
 		system("cls");
+
+		x = 0;
+		y = 0;
 
 		goto begin;
 
