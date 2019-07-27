@@ -43,12 +43,9 @@ void print(int, vector<vector<string> > = ground, vector<vector<int> > = mines, 
 
 int main()
 {
-    srand((unsigned)time(0));
-
-    HANDLE hOutput;
     COORD coord = { 0,0 };
-    hOutput = GetStdHandle(STD_OUTPUT_HANDLE);
 
+    HANDLE hOutput = GetStdHandle(STD_OUTPUT_HANDLE);
     HANDLE hOutBuf = CreateConsoleScreenBuffer(
         GENERIC_READ | GENERIC_WRITE,
         FILE_SHARE_READ | FILE_SHARE_WRITE,
@@ -74,7 +71,6 @@ int main()
 
     while (1)
     {
-
         screenClear(hOutput);
 
         switch (flag)
@@ -194,7 +190,8 @@ int main()
                 flag = -1;
             }
             break;
-        case -1:
+        case -1://初始化
+            srand((unsigned)time(0));
             row = 0;
             col = 0;
             mineNum = 0;
