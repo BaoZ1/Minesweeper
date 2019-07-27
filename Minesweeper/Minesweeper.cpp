@@ -77,7 +77,7 @@ int main()
         {
         case -2://欢迎界面
             cout << "//////////////////////////////" << '\n'
-                << "//  Press 'Enter' To Begin  //        <- 欢迎界面" << '\n'
+                << "//  Press Enter To Start    //        <- 欢迎界面" << '\n'
                 << "//////////////////////////////" << endl;
             break;
         case -1://初始化
@@ -214,6 +214,10 @@ int main()
                 flag = 1;
 
             }
+            else if (i == -2)
+            {
+                row /= 10;
+            }
         }
         break;
         case 1://列数
@@ -228,6 +232,10 @@ int main()
             {
                 flag = 2;
             }
+            else if (i == -2)
+            {
+                col /= 10;
+            }
         }
         break;
         case 2://雷数
@@ -241,6 +249,10 @@ int main()
             else if (i == -1)
             {
                 flag = 3;
+            }
+            else if (i == -2)
+            {
+                mineNum /= 10;
             }
         }
         break;
@@ -257,6 +269,10 @@ int main()
             else if (i == -1)
             {
                 flag = 3;
+            }
+            else if (i == -2)
+            {
+                mineNum /= 10;
             }
         }
         break;
@@ -698,11 +714,15 @@ int numInput(int& num, int(&arr)[5])
         {
             num--;
         }
+        else if (num == -2)
+        {
+            num += 2;
+        }
         else if ((!((num == 3) || (num == 6) || (num == 9))) && (num != -1))
         {
             num++;
         }
-        return -2;
+        return -3;
 
     case 0x41:
         if ((!((num == 1) || (num == 4) || (num == 7))) && (num > 0))
@@ -713,19 +733,27 @@ int numInput(int& num, int(&arr)[5])
         {
             num++;
         }
-        return -2;
+        else if (num == 0)
+        {
+            num -= 2;
+        }
+        return -3;
 
     case 0x53:
         if ((num > 0) && (num < 7))
         {
             num += 3;
         }
-        else if (num != 7)
+        else if (!((num == 7) || (num == -2)))
         {
             num = ((num == 8) || (num == 0)) ? 0 : -1;
         }
+        else
+        {
+            num = -2;
+        }
 
-        return -2;
+        return -3;
 
     case 0x57:
         if (num > 3)
@@ -734,9 +762,9 @@ int numInput(int& num, int(&arr)[5])
         }
         else if (num < 1)
         {
-            num = (num == 0) ? 8 : 9;
+            num = (num == 0) ? 8 : ((num == -1) ? 9 : 7);
         }
-        return -2;
+        return -3;
 
     case 0x0D:
 
@@ -775,15 +803,19 @@ void numGround(int& num)
     switch (num)
     {
     case 0:
-        cout << "        -> 0     done";
+        cout << "     del-> 0     done";
         break;
 
     case -1:
-        cout << "           0  -> done";
+        cout << "     del   0  -> done";
+        break;
+
+    case -2:
+        cout << "  -> del   0     done";
         break;
 
     default:
-        cout << "           0     done";
+        cout << "     del   0     done";
     }
 }
 
