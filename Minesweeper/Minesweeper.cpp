@@ -98,7 +98,7 @@ int main()
             numGround();
             break;
         case 3://判断雷数
-            if (mineNum > (row * col * 0.5))
+            if (mineNum > (int)((double)row * (double)col * 0.5))
             {
                 mineNum = 0;
 
@@ -275,7 +275,6 @@ int main()
         }
         break;
         case 5://显示雷区
-            slct = 0;
 
             switch (check(S))
             {
